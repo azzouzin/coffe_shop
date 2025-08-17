@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import '../../../../core/assets_paths.dart';
-import '../../../../core/theme/light_theme.dart';
 import '../../../../core/widgets/custom_icon_button.dart';
+import 'custom_text_field.dart';
 
 class AppBarContenet extends StatelessWidget {
   const AppBarContenet({super.key});
@@ -58,37 +58,7 @@ class AppBarContenet extends StatelessWidget {
           // Custom Search Bar
           Row(
             children: [
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: LightThemeConstants.appBarGredients,
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: "Search your coffee...",
-                        hintStyle: Theme.of(context).textTheme.bodySmall,
-                        prefixIcon: const Icon(
-                          Icons.search,
-                          color: Colors.white,
-                        ),
-                        border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(
-                          vertical: 14,
-                          horizontal: 16,
-                        ),
-                      ),
-                      style: const TextStyle(color: Colors.white),
-                      cursorColor: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
+              CustomTextField(),
               Gap(8),
               CustomIconButton(
                 size: Size(40, 45),

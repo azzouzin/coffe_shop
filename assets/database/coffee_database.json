@@ -1,0 +1,112 @@
+[
+  {
+    "name": "Espresso",
+    "category": "Hot Coffee",
+    "price": 2.50,
+    "stars": 4.7,
+    "reviews": 1520,
+    "image": "assets/images/espresso.png",
+    "ingredients": ["Espresso Shot", "Water"],
+    "serving_time": "5 min",
+    "description": "A strong and bold coffee shot made by forcing hot water under pressure through finely-ground coffee beans. Perfect for a quick caffeine boost."
+  },
+  {
+    "name": "Cappuccino",
+    "category": "Hot Coffee",
+    "price": 3.50,
+    "stars": 4.8,
+    "reviews": 980,
+    "image": "assets/images/cappuccino.png",
+    "ingredients": ["Espresso", "Steamed Milk", "Foamed Milk"],
+    "serving_time": "7 min",
+    "description": "An Italian classic with a balanced mix of espresso, steamed milk, and creamy milk foam, often topped with a sprinkle of cocoa powder."
+  },
+  {
+    "name": "Latte",
+    "category": "Hot Coffee",
+    "price": 3.80,
+    "stars": 4.6,
+    "reviews": 1120,
+    "image": "assets/images/latte.png",
+    "ingredients": ["Espresso", "Steamed Milk"],
+    "serving_time": "8 min",
+    "description": "A smooth and creamy coffee drink made with espresso and steamed milk, often flavored with syrups like vanilla, caramel, or hazelnut."
+  },
+  {
+    "name": "Cold Brew",
+    "category": "Cold Coffee",
+    "price": 4.20,
+    "stars": 4.5,
+    "reviews": 760,
+    "image": "assets/images/coldbrew.png",
+    "ingredients": ["Cold Brew Coffee", "Ice", "Water"],
+    "serving_time": "10 min",
+    "description": "A refreshing coffee steeped in cold water for 12-24 hours, resulting in a smooth, less acidic, and highly caffeinated drink."
+  },
+  {
+    "name": "Mocha",
+    "category": "Hot Coffee",
+    "price": 4.00,
+    "stars": 4.7,
+    "reviews": 870,
+    "image": "assets/images/mocha.png",
+    "ingredients": ["Espresso", "Steamed Milk", "Chocolate Syrup", "Whipped Cream"],
+    "serving_time": "9 min",
+    "description": "A delicious fusion of espresso and rich chocolate topped with whipped cream, combining the best of coffee and dessert in one cup."
+  },
+  {
+    "name": "Iced Caramel Macchiato",
+    "category": "Cold Coffee",
+    "price": 4.50,
+    "stars": 4.9,
+    "reviews": 1330,
+    "image": "assets/images/iced_caramel_macchiato.png",
+    "ingredients": ["Espresso", "Milk", "Caramel Sauce", "Ice"],
+    "serving_time": "6 min",
+    "description": "A sweet and refreshing iced coffee drink layered with milk, espresso, and rich caramel drizzle."
+  },
+  {
+    "name": "Americano",
+    "category": "Hot Coffee",
+    "price": 2.80,
+    "stars": 4.4,
+    "reviews": 690,
+    "image": "assets/images/americano.png",
+    "ingredients": ["Espresso", "Hot Water"],
+    "serving_time": "5 min",
+    "description": "A classic coffee beverage made by diluting espresso with hot water, offering a smooth and mellow taste."
+  },
+  {
+    "name": "Flat White",
+    "category": "Hot Coffee",
+    "price": 3.90,
+    "stars": 4.7,
+    "reviews": 820,
+    "image": "assets/images/flatwhite.png",
+    "ingredients": ["Espresso", "Steamed Milk"],
+    "serving_time": "7 min",
+    "description": "A velvety coffee made with espresso and microfoam milk, offering a stronger coffee flavor than a latte."
+  },
+  {
+    "name": "Frappuccino",
+    "category": "Blended Coffee",
+    "price": 5.00,
+    "stars": 4.9,
+    "reviews": 2100,
+    "image": "assets/images/frappuccino.png",
+    "ingredients": ["Coffee", "Milk", "Sugar", "Ice", "Whipped Cream"],
+    "serving_time": "12 min",
+    "description": "A cold and creamy blended coffee drink with ice, milk, and sweet flavors, topped with whipped cream."
+  },
+  {
+    "name": "Irish Coffee",
+    "category": "Specialty Coffee",
+    "price": 6.50,
+    "stars": 4.6,
+    "reviews": 540,
+    "image": "assets/images/irishcoffee.png",
+    "ingredients": ["Coffee", "Irish Whiskey", "Sugar", "Cream"],
+    "serving_time": "10 min",
+    "description": "A rich coffee cocktail made with hot coffee, Irish whiskey, sugar, and topped with lightly whipped cream."
+  }
+]

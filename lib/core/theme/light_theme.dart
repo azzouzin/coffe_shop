@@ -51,8 +51,5 @@ class LightThemeConstants {
   static const Color onPrimaryColor = Colors.white;
   static const Color onSecondaryColor = Colors.black;
   static List<Color> gradientColors = [Color(0xFFC67C4E), Color(0xFFEDD6C8)];
-  static List<Color> appBarGredients = [
-    Color(0xFF111111),
-    Color.fromARGB(255, 30, 30, 30),
-  ];
+  static List<Color> appBarGredients = [Color(0xFF111111), Color(0xFF313131)];
 }
