@@ -1,9 +1,11 @@
+import 'package:coffe_shop/core/theme/cubit/theme_cubit.dart';
 import 'package:coffe_shop/core/utils/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/widgets/custom_button.dart';
 import '../view_model/cubit/splash_cubit.dart';
 import 'widgets/fade_animation.dart';
 
@@ -117,6 +119,10 @@ class _SplashViewState extends State<SplashView>
                         onPressed: () {
                           // Navigate to the next screen
                           context.go('/home');
+                          // print(Theme.of(context).primaryColor.toString());
+                          // // Output: Brightness.light or Brightness.dark
+                          // BlocProvider.of<ThemeCubit>(context).toggleTheme();
+                          // print(Theme.of(context).brightness);
                         },
                       ),
                     ),
@@ -127,32 +133,6 @@ class _SplashViewState extends State<SplashView>
           ),
         ],
       ),
-    );
-  }
-}
-
-class CustomButton extends StatelessWidget {
-  const CustomButton({super.key, this.onPressed, this.child, this.size});
-  final Function()? onPressed;
-  final Widget? child;
-  final Size? size;
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        fixedSize: size,
-        backgroundColor: Theme.of(context).primaryColor,
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      ),
-      child:
-          child ??
-          Text(
-            AppStrings.getStarted,
-            style: Theme.of(context).textTheme.titleSmall,
-          ),
     );
   }
 }

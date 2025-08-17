@@ -28,7 +28,7 @@ class HomeView extends StatelessWidget {
                         colors: LightThemeConstants.appBarGredients,
                         begin: Alignment.topRight,
                         end: Alignment.bottomLeft,
-                        stops: const [0.0, 0.95],
+                        stops: const [0.0, 0.99],
                       ),
                     ),
                   ),

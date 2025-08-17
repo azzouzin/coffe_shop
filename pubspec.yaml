@@ -42,6 +42,7 @@ dependencies:
   path_provider: ^2.1.5
   hydrated_bloc: ^9.1.5
   gap: ^3.0.1
+  flutter_svg: ^2.2.0
 
 dev_dependencies:
   flutter_test:
@@ -53,7 +54,16 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
+  asset_generator: ^1.2.0
 
+asset_generator:
+  images:
+    - assets/images/
+  icons:
+    - assets/icons/
+
+  # output_dir: lib/core/assets_paths.dart #optional
+  class_name: Assets #optional
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -68,8 +78,8 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
-    - assets/svgs/
     - assets/fonts/
+    - assets/svgs/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 ThemeData darkTheme = ThemeData(
   fontFamily: 'Sora',
+  primaryColor: Color(0xFFC67C4E),
   colorScheme: ColorScheme.dark(
     primary: Color(0xFFC67C4E),
     secondary: Color(0xFFEDD6C8),

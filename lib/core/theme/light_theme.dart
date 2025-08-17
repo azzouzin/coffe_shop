@@ -11,6 +11,7 @@ ThemeData lightTheme = ThemeData(
     },
   ),
   fontFamily: 'Sora',
+  primaryColor: Color(0xFFC67C4E),
   colorScheme: ColorScheme.light(
     primary: Color(0xFFC67C4E),
     secondary: Color(0xFFEDD6C8),
@@ -21,8 +22,9 @@ ThemeData lightTheme = ThemeData(
   ),
   textTheme: TextTheme(
     headlineLarge: TextStyle(color: Color(0xFF313131)),
-    bodyLarge: TextStyle(color: Color(0xFF313131)),
-    bodyMedium: TextStyle(color: Color(0xFFA2A2A2)),
+    bodyLarge: TextStyle(color: Color(0xFF313131), fontSize: 12),
+    bodyMedium: TextStyle(color: Color(0xFFA2A2A2), fontSize: 14),
+    bodySmall: TextStyle(color: Color(0xFFA2A2A2)),
     titleLarge: TextStyle(
       color: Colors.white,
       fontSize: 48,
@@ -49,5 +51,8 @@ class LightThemeConstants {
   static const Color onPrimaryColor = Colors.white;
   static const Color onSecondaryColor = Colors.black;
   static List<Color> gradientColors = [Color(0xFFC67C4E), Color(0xFFEDD6C8)];
-  static List<Color> appBarGredients = [Color(0xFF111111), Color(0xFF313131)];
+  static List<Color> appBarGredients = [
+    Color(0xFF111111),
+    Color.fromARGB(255, 30, 30, 30),
+  ];
 }
