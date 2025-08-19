@@ -1,10 +1,26 @@
+import 'package:coffe_shop/core/assets_paths.dart';
 import 'package:coffe_shop/features/home/view_model/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'widgets/categories_list.dart';
 import 'widgets/home_app_bar.dart';
+import 'widgets/coffe_card.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,84 +37,31 @@ class HomeView extends StatelessWidget {
       body: BlocProvider(
         create: (context) => HomeCubit()..changeCategorie(0),
         child: CustomScrollView(
+          controller: _scrollController,
           slivers: [
             const HomeAppBar(),
 
-            // 🔹 قائمة الكاتيغوريات أفقية
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 60,
-                child: BlocBuilder<HomeCubit, HomeState>(
-                  builder: (context, state) {
-                    return state is HomeLoaded
-                        ? ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: categories.length,
-                            itemBuilder: (context, index) {
-                              return InkWell(
-                                onTap: () => BlocProvider.of<HomeCubit>(
-                                  context,
-                                ).changeCategorie(index),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8.0,
-                                  ),
-                                  child: AnimatedContainer(
-                                    duration: const Duration(milliseconds: 300),
-                                    curve: Curves.easeInOut,
-                                    child: Chip(
-                                      label: Text(categories[index]),
-                                      backgroundColor: state.categorie == index
-                                          ? Theme.of(context).primaryColor
-                                          : Colors.brown.shade100,
-                                      labelStyle: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: state.categorie == index
-                                            ? Colors.white
-                                            : Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                          )
-                        : CircularProgressIndicator();
-                  },
-                ),
-              ),
-            ),
+            // 🔹 Categories
+            Categories(categories: categories),
 
-            // 🔹 Grid للقهوة مع Gradient
+            // 🔹 Grid with per-item parallax
             SliverPadding(
               padding: const EdgeInsets.all(12),
               sliver: SliverGrid(
                 delegate: SliverChildBuilderDelegate((context, index) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      gradient: LinearGradient(
-                        colors: [Colors.brown.shade400, Colors.brown.shade900],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        coffees[index],
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
+                  return CoffeeParallaxCard(
+                    title: coffees[index],
+                    subtitle: "Delicious coffee",
+                    imageUrl: Assets.coffee2, // Replace with actual image URL
+                    price: 3.99 + index,
+                    rating: 4.5 + (index % 5) * 0.1,
                   );
                 }, childCount: coffees.length),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, // 2 كولونات
+                  crossAxisCount: 2,
                   mainAxisSpacing: 12,
                   crossAxisSpacing: 12,
-                  childAspectRatio: 3 / 4, // شكل الكارت
+                  childAspectRatio: 3 / 4,
                 ),
               ),
             ),
