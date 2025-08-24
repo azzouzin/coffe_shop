@@ -1,4 +1,3 @@
-import 'package:coffe_shop/core/assets_paths.dart';
 import 'package:coffe_shop/features/home/view_model/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,48 +23,91 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    final categories = [
-      "Espresso",
-      "Cappuccino",
-      "Latte",
-      "Mocha",
-      "Americano",
-    ];
-    final coffees = List.generate(10, (index) => "Coffee $index");
-
     return Scaffold(
       body: BlocProvider(
-        create: (context) => HomeCubit()..changeCategorie(0),
-        child: CustomScrollView(
-          controller: _scrollController,
-          slivers: [
-            const HomeAppBar(),
+        create: (context) => HomeCubit(),
+        child: BlocBuilder<HomeCubit, HomeState>(
+          builder: (context, state) {
+            if (state is HomeLoading) {
+              return const Scaffold(
+                body: Center(child: CircularProgressIndicator()),
+              );
+            }
 
-            // 🔹 Categories
-            Categories(categories: categories),
-
-            // 🔹 Grid with per-item parallax
-            SliverPadding(
-              padding: const EdgeInsets.all(12),
-              sliver: SliverGrid(
-                delegate: SliverChildBuilderDelegate((context, index) {
-                  return CoffeeParallaxCard(
-                    title: coffees[index],
-                    subtitle: "Delicious coffee",
-                    imageUrl: Assets.coffee2, // Replace with actual image URL
-                    price: 3.99 + index,
-                    rating: 4.5 + (index % 5) * 0.1,
-                  );
-                }, childCount: coffees.length),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  // mainAxisSpacing: 8,
-                  // crossAxisSpacing: 8,
-                  childAspectRatio: 3 / 4,
+            if (state is HomeError) {
+              return Scaffold(
+                body: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.error_outline,
+                        size: 64,
+                        color: Colors.red,
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        'Error: ${state.message}',
+                        style: const TextStyle(fontSize: 16),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 16),
+                      ElevatedButton(
+                        onPressed: () {
+                          context.read<HomeCubit>().loadCoffees();
+                        },
+                        child: const Text('Retry'),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ),
-          ],
+              );
+            }
+
+            if (state is HomeLoaded) {
+              return CustomScrollView(
+                controller: _scrollController,
+                slivers: [
+                  const HomeAppBar(),
+
+                  // 🔹 Categories
+                  Categories(
+                    categories: state.categories,
+                    selectedCategory: state.selectedCategory,
+                    onCategoryChanged: (category) {
+                      context.read<HomeCubit>().changeCategory(category);
+                    },
+                  ),
+
+                  // 🔹 Grid with coffee cards
+                  SliverPadding(
+                    padding: const EdgeInsets.all(12),
+                    sliver: SliverGrid(
+                      delegate: SliverChildBuilderDelegate((context, index) {
+                        final coffee = state.filteredCoffees[index];
+                        return CoffeeParallaxCard(
+                          title: coffee.name,
+                          subtitle: coffee.description,
+                          imageUrl: coffee.image,
+                          price: coffee.price,
+                          rating: coffee.stars,
+                        );
+                      }, childCount: state.filteredCoffees.length),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 3 / 4,
+                          ),
+                    ),
+                  ),
+                ],
+              );
+            }
+
+            return const Scaffold(
+              body: Center(child: CircularProgressIndicator()),
+            );
+          },
         ),
       ),
     );

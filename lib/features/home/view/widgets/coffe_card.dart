@@ -116,11 +116,11 @@ class CoffeeParallaxCard extends StatelessWidget {
                   subtitle,
                   style: const TextStyle(
                     color: Color(0xFF6B6B6B),
-                    fontSize: 13,
+                    fontSize: 12,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 8),
 
                 // Price and add button row
                 Row(
