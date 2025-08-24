@@ -20,184 +20,143 @@ class CoffeeParallaxCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 180,
-      margin: const EdgeInsets.all(12),
+      margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.08),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 12,
+            offset: const Offset(0, 6),
+            spreadRadius: 0,
           ),
         ],
       ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(24),
-        child: Stack(
-          children: [
-            // الصورة مع Parallax
-            _ParallaxImage(imageUrl: imageUrl),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Image section with rating overlay
+          Stack(
+            children: [
+              // Coffee image
+              Container(
+                height: 140,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                ),
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                  child: Image.asset(imageUrl, fit: BoxFit.cover),
+                ),
+              ),
 
-            // باقي المحتوى
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 160), // نفس ارتفاع الصورة
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+              // Rating overlay
+              Positioned(
+                top: 8,
+                right: 8,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF4A4A4A),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
+                      const Icon(
+                        Icons.star,
+                        size: 14,
+                        color: Color(0xFFFFD700),
+                      ),
+                      const SizedBox(width: 4),
                       Text(
-                        title,
+                        rating.toString(),
                         style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 12,
                         ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        subtitle,
-                        style: TextStyle(
-                          color: Colors.grey.shade600,
-                          fontSize: 13,
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "\$ ${price.toStringAsFixed(2)}",
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.all(6),
-                            decoration: BoxDecoration(
-                              color: Colors.brown,
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: const Icon(
-                              Icons.add,
-                              color: Colors.white,
-                              size: 18,
-                            ),
-                          ),
-                        ],
                       ),
                     ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
+          ),
 
-            // التقييم في الأعلى
-            Positioned(
-              top: 8,
-              right: 8,
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.6),
-                  borderRadius: BorderRadius.circular(12),
+          // Content section
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Product name
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                    color: Color(0xFF2D2D2D),
+                  ),
                 ),
-                child: Row(
+                const SizedBox(height: 4),
+                // Subtitle/description
+                Text(
+                  subtitle,
+                  style: const TextStyle(
+                    color: Color(0xFF6B6B6B),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                const SizedBox(height: 12),
+
+                // Price and add button row
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Icon(Icons.star, size: 16, color: Colors.amber),
-                    const SizedBox(width: 2),
+                    // Price
                     Text(
-                      rating.toString(),
+                      "\$ ${price.toStringAsFixed(2)}",
                       style: const TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 18,
+                        color: Color(0xFF2D2D2D),
+                      ),
+                    ),
+
+                    // Add button
+                    Container(
+                      width: 32,
+                      height: 32,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFC67C4E),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Icon(
+                        Icons.add,
                         color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12,
+                        size: 20,
                       ),
                     ),
                   ],
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
-  }
-}
-
-/// ويدجت خاصة بالـ Parallax
-class _ParallaxImage extends StatelessWidget {
-  final String imageUrl;
-
-  const _ParallaxImage({required this.imageUrl});
-
-  @override
-  Widget build(BuildContext context) {
-    final scrollable = Scrollable.of(context);
-    final scrollPosition = scrollable?.position;
-
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return Flow(
-          delegate: _ParallaxFlowDelegate(
-            scrollable: scrollable!,
-            listItemContext: context,
-            imageHeight: 220, // أكبر من الكارت باش يبان التأثير
-          ),
-          children: [Image.asset(imageUrl, fit: BoxFit.cover)],
-        );
-      },
-    );
-  }
-}
-
-class _ParallaxFlowDelegate extends FlowDelegate {
-  final ScrollableState scrollable;
-  final BuildContext listItemContext;
-  final double imageHeight;
-
-  _ParallaxFlowDelegate({
-    required this.scrollable,
-    required this.listItemContext,
-    required this.imageHeight,
-  }) : super(repaint: scrollable.position);
-
-  @override
-  void paintChildren(FlowPaintingContext context) {
-    // موقع الكارت في الشاشة
-    final scrollBox = scrollable.context.findRenderObject() as RenderBox;
-    final listItemBox = listItemContext.findRenderObject() as RenderBox;
-    final listItemOffset = listItemBox.localToGlobal(
-      listItemBox.size.centerLeft(Offset.zero),
-      ancestor: scrollBox,
-    );
-
-    // نسبة التمركز
-    final viewportDimension = scrollable.position.viewportDimension;
-    final scrollFraction = (listItemOffset.dy / viewportDimension).clamp(
-      0.0,
-      1.0,
-    );
-
-    // حركة الصورة (Parallax)
-    final verticalAlignment = Alignment(0.0, scrollFraction * 2 - 1);
-
-    final transform = Matrix4.translationValues(
-      0,
-      -(imageHeight - context.size.height) / 2 * verticalAlignment.y,
-      0,
-    );
-
-    context.paintChild(0, transform: transform);
-  }
-
-  @override
-  bool shouldRepaint(covariant _ParallaxFlowDelegate oldDelegate) {
-    return oldDelegate.scrollable != scrollable ||
-        oldDelegate.listItemContext != listItemContext ||
-        oldDelegate.imageHeight != imageHeight;
   }
 }
